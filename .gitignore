@@ -57,3 +57,5 @@ dkms.conf
 
 *.asm
 *.ps1
+*.bin
+*.hex

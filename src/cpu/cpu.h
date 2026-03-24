@@ -1,12 +1,15 @@
 #ifndef CPU_H
 #define CPU_H
 
+#include "../ram/ram.h"
+
 // Commands
 #define EXIT 0xFF
 
 #define MOV 0x10
 
 #define ADD 0x20
+#define SUB 0x21
 
 #define JZ 0x30
 #define JMP 0x31
@@ -23,7 +26,7 @@
 #define N 6
 #define O 7
 
-extern unsigned char RAM[1024];
+extern unsigned char RAM[RAMSIZE];
 
 void cpu();
 

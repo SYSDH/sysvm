@@ -2,7 +2,7 @@
 
 #include "cpu.h"
 
-unsigned char RAM[1024];
+unsigned char RAM[RAMSIZE];
 int reg[8];
 
 int PC = 0;
@@ -42,6 +42,14 @@ void cpu() {
                 break;
             }
 
+            case SUB: {
+                unsigned char regIndex = RAM[PC++];
+                unsigned char value = RAM[PC++];
+
+                reg[regIndex] -= value;
+                break;
+            }
+
             case JMP:
                 PC = RAM[PC++];
                 break;
@@ -49,7 +57,7 @@ void cpu() {
             case JZ: {
                 unsigned char regIndex = RAM[PC++];
 
-                if (!reg[regIndex]) PC = RAM[PC];
+                if (!reg[regIndex]) PC = RAM[PC++];
                 else PC++;
 
                 break;
