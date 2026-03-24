@@ -12,7 +12,8 @@
 #define SUB 0x21
 
 #define JZ 0x30
-#define JMP 0x31
+#define JNZ 0x31
+#define JMP 0x32
 
 #define WRITE 0x40
 

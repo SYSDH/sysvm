@@ -63,6 +63,15 @@ void cpu() {
                 break;
             }
 
+            case JNZ: {
+                unsigned char regIndex = RAM[PC++];
+
+                if (reg[regIndex]) PC = RAM[PC++];
+                else PC++;
+
+                break;
+            }
+
             case EXIT:
                 return;
         }
