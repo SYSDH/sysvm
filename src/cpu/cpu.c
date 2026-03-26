@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "cpu.h"
 
@@ -44,6 +45,24 @@ void cpu() {
                 break;
             }
 
+            case IN: {
+                char buffer[256];
+                
+                if (fgets(buffer, sizeof(buffer), stdin)) {
+                    buffer[strcspn(buffer, "\n")] = 0;
+                    int len = strlen(buffer);
+
+                    writeInt(Pb - 3, -1); 
+                    Pb -= 4;
+
+                    for (int i = len - 1; i >= 0; i--) {
+                        writeInt(Pb - 3, (int)buffer[i]);
+                        Pb -= 4;
+                    }
+                }
+                break;
+            }
+            
             case LOAD: case LOAD_REG: {
                 int addr;
 
@@ -88,7 +107,7 @@ void cpu() {
                     value = readInt();
                 }
                 
-                unsigned char mode = RAM[PC++];
+                int mode = readInt();
 
                 if (mode) {
                     printf("%c", (char)value);
