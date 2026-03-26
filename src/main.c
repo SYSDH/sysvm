@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 
 #include "cpu/cpu.h"
 #include "ram/ram.h"
@@ -14,9 +15,9 @@ int main(int argc, char **argv) {
     if (!pos) { showError(FATAL_ERROR, "no input files"); return 1;}
 
     FILE *f = fopen(pos, "rb");
-    if (!f) return 1;
+    if (!f) {char buff[PATH_MAX]; snprintf(buff, PATH_MAX, "unable to open file: %s", pos); showError(FATAL_ERROR, buff); return 1;}
 
-    fread(RAM, 1, RAMSIZE, f); 
+    fread(RAM, 1, RAMSIZE, f);
 
     fclose(f);
 

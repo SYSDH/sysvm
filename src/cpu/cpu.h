@@ -4,18 +4,29 @@
 #include "../ram/ram.h"
 
 // Commands
-#define EXIT 0xFF
+typedef enum {
+    // System
+    EXIT        = 0xFF,
 
-#define MOV 0x10
+    // Data
+    MOV         = 0x10, MOV_REG     = 0x11,
+    // Math
+    ADD         = 0x20, ADD_REG     = 0x21,
+    SUB         = 0x22, SUB_REG     = 0x23,
+    // Flow
+    JZ          = 0x30,
+    JNZ         = 0x31,
+    JMP         = 0x32, JMP_REG     = 0x33,
+    // I/O
+    OUT         = 0x40, OUT_REG     = 0x41,
+    // Stack
+    PUSH        = 0x50, PUSH_REG    = 0x51,
+    POP         = 0x52,
+    // Ram
+    LOAD        = 0x60, LOAD_REG    = 0x61,
+    STORE       = 0x62, STORE_REG   = 0x63,
 
-#define ADD 0x20
-#define SUB 0x21
-
-#define JZ 0x30
-#define JNZ 0x31
-#define JMP 0x32
-
-#define WRITE 0x40
+} Opcode;
 
 // Register
 #define H 0
