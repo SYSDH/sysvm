@@ -2,9 +2,9 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/language-C-blue?cacheSeconds=300" alt="C">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/SYSDH/sysvm?cacheSeconds=300" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/sysdh/sysvm?cacheSeconds=300" alt="License"></a>
   <img src="https://img.shields.io/github/stars/SYSDH/sysvm?cacheSeconds=300" alt="GitHub stars">
-  <a href="https://github.com/Artxzzzz/sysvm/releases/latest">
+  <a href="https://github.com/SYSDH/sysvm/releases/latest">
     <img src="https://img.shields.io/github/v/release/SYSDH/sysvm?cacheSeconds=300" alt="Latest release">
   </a>
 </p>
