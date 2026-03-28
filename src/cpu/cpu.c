@@ -4,7 +4,7 @@
 #include "cpu.h"
 
 unsigned char RAM[RAMSIZE];
-int reg[8];
+int reg[8] = {0};
 
 int Pb = RAMSIZE - 1;
 int PC = 0;
