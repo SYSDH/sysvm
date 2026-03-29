@@ -119,6 +119,33 @@ void cpu() {
                 break;
             }
 
+            case CALL: {
+                int target = readInt();
+
+                writeInt(Pb - 3, PC);
+                Pb -= 4;
+
+                PC = target;
+                break;
+            }
+
+            case RET: {
+                if (Pb >= RAMSIZE - 1) {
+                    return; 
+                }
+                
+                Pb += 4;
+
+                int returnAddr = 0;
+                returnAddr |= RAM[Pb-3];
+                returnAddr |= RAM[Pb-2] << 8;
+                returnAddr |= RAM[Pb-1] << 16;
+                returnAddr |= RAM[Pb]   << 24;
+                
+                PC = returnAddr;
+                break;
+            }
+
             case ADD: case ADD_REG: {
                 unsigned char dest = RAM[PC++];
 
