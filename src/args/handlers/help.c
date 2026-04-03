@@ -9,6 +9,9 @@ void handleHelp(const char *val, void *context) {
     #define BRIGHT "\x1b[1m"
     #define RESET "\x1b[0m"
 
+    (void)val;
+    (void)context;
+
     printf("Usage: %s%s [options] <File>%s\n\n", BRIGHT, programName, RESET);
     printf("%sOptions%s:\n", BRIGHT, RESET);
 

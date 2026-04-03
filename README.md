@@ -45,6 +45,8 @@ It was built for those who want to understand how a processor works under the ho
 | JNZ       | 0x31        | 49      | 00110001 |
 | JMP       | 0x32        | 50      | 00110010 |
 | JMP_REG   | 0x33        | 51      | 00110011 |
+| CALL      | 0x34        | 52      | 00110100 |
+| RET       | 0x35        | 53      | 00110101 |
 | OUT       | 0x40        | 64      | 01000000 |
 | OUT_REG   | 0x41        | 65      | 01000001 |
 | IN        | 0x42        | 66      | 01000010 |
@@ -55,6 +57,7 @@ It was built for those who want to understand how a processor works under the ho
 | LOAD_REG  | 0x61        | 97      | 01100001 |
 | STORE     | 0x62        | 98      | 01100010 |
 | STORE_REG | 0x63        | 99      | 01100011 |
+
 
 <br>
 
