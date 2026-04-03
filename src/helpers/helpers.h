@@ -10,7 +10,7 @@ typedef enum {
 
 extern char *programName;
 
-void showError(Severity sev, char *extraMessage);
+void showError(Severity sev, const char *extraMessage, ...);
 void setProgram(char *programVar);
 
 #endif

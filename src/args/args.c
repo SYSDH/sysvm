@@ -37,10 +37,7 @@ int parseArgs(int argc, char **argv, void *context, char **targetPos) {
                     if (i + 1 < argc) {
                         val = argv[++i];
                     } else {
-                        char buff[256];
-
-                        sprintf(buff, "the option %s need a value.\n", current);
-                        showError(FATAL_ERROR, buff);
+                        showError(FATAL_ERROR, "the option %s need a value.\n", current);
                         return 1;
                     }
                 }
@@ -52,10 +49,7 @@ int parseArgs(int argc, char **argv, void *context, char **targetPos) {
         }
 
         if (!found) {
-            char buff[1024];
-
-            sprintf(buff, "unrecognized command-line option '%s'\n", current);
-            showError(FATAL_ERROR, buff);
+            showError(FATAL_ERROR, "unrecognized command-line option '%s'\n", current);
             return 1;
         }
     }
