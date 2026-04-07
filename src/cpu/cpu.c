@@ -6,7 +6,7 @@
 unsigned char RAM[RAMSIZE];
 int reg[8] = {0};
 
-int Pb = RAMSIZE - 1;
+int Pb = RAMSIZE - 4;
 int PC = 0;
 
 static int readInt() {
@@ -27,6 +27,7 @@ static void writeInt(int addr, int val) {
 
 
 void cpu() {
+    
     while (1)
     {
         unsigned char opcd = RAM[PC++];
@@ -52,13 +53,14 @@ void cpu() {
                     buffer[strcspn(buffer, "\n")] = 0;
                     int len = strlen(buffer);
 
-                    writeInt(Pb - 3, -1); 
+                    writeInt(Pb - 3, 0); 
                     Pb -= 4;
 
                     for (int i = len - 1; i >= 0; i--) {
                         writeInt(Pb - 3, (int)buffer[i]);
                         Pb -= 4;
                     }
+
                 }
                 break;
             }
@@ -130,7 +132,7 @@ void cpu() {
             }
 
             case RET: {
-                if (Pb >= RAMSIZE - 1) {
+                if (Pb >= RAMSIZE - 4) {
                     return; 
                 }
                 
@@ -174,18 +176,32 @@ void cpu() {
                 PC = readInt();
                 break;
 
-            case JZ: {
+            case JZ: case JNZ: {
                 unsigned char regIndex = RAM[PC++];
                 int target = readInt();
-                if (!reg[regIndex]) PC = target;
+                int cond = (opcd == JZ) ? !reg[regIndex] : reg[regIndex];
+
+                if (cond) PC = target;
 
                 break;
             }
 
-            case JNZ: {
+            case JG: case JL:  {
                 unsigned char regIndex = RAM[PC++];
                 int target = readInt();
-                if (reg[regIndex]) PC = target;
+                int cond = (opcd == JG) ? reg[regIndex] > 0 : reg[regIndex] < 0;
+
+                if (cond) PC = target;
+
+                break;
+            }
+
+            case JGE: case JLE:  {
+                unsigned char regIndex = RAM[PC++];
+                int target = readInt();
+                int cond = (opcd == JGE) ? reg[regIndex] >= 0 : reg[regIndex] <= 0;
+
+                if (cond) PC = target;
 
                 break;
             }
@@ -201,12 +217,12 @@ void cpu() {
                 
                 writeInt(Pb - 3, val);
                 Pb -= 4;
-
+                
                 break;
             }
 
             case POP: {
-                if (Pb >= RAMSIZE - 1) {reg[RAM[PC++]] = -1; break;}
+                if (Pb >= RAMSIZE - 4) {reg[RAM[PC++]] = 0; break;}
 
                 Pb += 4;
                 unsigned char dest = RAM[PC++];
