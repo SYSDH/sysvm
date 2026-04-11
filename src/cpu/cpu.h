@@ -10,9 +10,11 @@ typedef enum {
 
     // Data
     MOV         = 0x10, MOV_REG     = 0x11,
+
     // Math
     ADD         = 0x20, ADD_REG     = 0x21,
     SUB         = 0x22, SUB_REG     = 0x23,
+
     // Flow
     JZ          = 0x30,
     JNZ         = 0x31,
@@ -24,7 +26,9 @@ typedef enum {
 
     // I/O
     OUT         = 0x40, OUT_REG     = 0x41,
-    IN          = 0x42,
+    IN          = 0x42, 
+    LOADF       = 0x43, LOADF_REG   = 0x44,
+
     // Stack
     PUSH        = 0x50, PUSH_REG    = 0x51,
     POP         = 0x52,

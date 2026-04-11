@@ -238,6 +238,64 @@ void cpu() {
             case EXIT:
                 return;
 
+            case LOADF: case LOADF_REG: {
+                int pathAddr;
+                int destAddr;
+
+                if (opcd == LOADF_REG) {
+                    pathAddr = reg[RAM[PC++]];
+                    destAddr = reg[RAM[PC++]];
+                } else {
+                    pathAddr = readInt();
+                    destAddr = readInt();
+                }
+
+                unsigned char regStatus = RAM[PC++];
+                int mode = readInt();
+                
+                char cleanPath[256];
+                for (int i = 0; i < 255; i++) {
+                    char c = RAM[pathAddr + (i * 4)];
+                    cleanPath[i] = c;
+                    if (c == '\0') break;
+                }
+                
+                cleanPath[255] = '\0';
+                FILE *f = fopen(cleanPath, "rb");
+                
+                if (!f) {
+                    reg[regStatus] = -1;
+                    break;
+                }
+
+                fseek(f, 0, SEEK_END);
+                long size = ftell(f);
+                rewind(f);
+
+                if (destAddr + (size * 4) > RAMSIZE) {
+                    reg[regStatus] = -2;
+                    fclose(f);
+                    break;
+                }
+
+                
+                if (mode == 0) {
+                    for (long i = 0; i < size; i++) {
+                        RAM[destAddr + i] = fgetc(f);
+                    }
+                } else {
+                    for (long i = 0; i < size; i++) {
+                        writeInt(destAddr + (i * 4), fgetc(f));
+                    }
+                    writeInt(destAddr + (size * 4), 0);
+                }
+                
+                fclose(f);
+                reg[regStatus] = (int)size;
+
+                break;
+            }
+
             default:
                 return;
         }
