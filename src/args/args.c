@@ -5,8 +5,9 @@
 #include "../helpers/helpers.h"
 
 ArgOption options[] = {
-    {"v", "version", "Show the version of project", 1, handleVersion},
-    {"h", "help", "Show this message", 0, handleHelp}
+    {"v", "version", "Show the version of project", 0, handleVersion},
+    {"h", "help", "Show this message", 0, handleHelp},
+    {NULL, "entry", "Set Program Counter", 1, handleEntry}
 };
 
 const int optCount = sizeof(options) / sizeof(options[0]);

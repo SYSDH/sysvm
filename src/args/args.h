@@ -10,6 +10,10 @@ typedef struct {
     void (*handler)(const char *val, void *context);
 } ArgOption;
 
+typedef struct {
+    int entryAddr;
+} Config;
+
 extern ArgOption options[];
 extern const int optCount;
 
@@ -17,5 +21,6 @@ int parseArgs(int argc, char **argv, void *context, char **targetPos);
 
 void handleVersion(const char *val, void *context);
 void handleHelp(const char *val, void *context);
+void handleEntry(const char *val, void *context);
 
 #endif

@@ -50,6 +50,6 @@ typedef enum {
 
 extern unsigned char RAM[RAMSIZE];
 
-void cpu();
+void cpu(int initpc);
 
 #endif

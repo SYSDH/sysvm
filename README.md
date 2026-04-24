@@ -13,7 +13,7 @@
 
 ## 📝 Description
 
-**SYSVM** is a lightweight 32-bit Virtual Machine written in **C**. It simulates a CPU with its own instruction set, 8 general-purpose registers (named after chemical elements), and 64KB of RAM. 
+**SYSVM** is a lightweight 32-bit Virtual Machine written in **C**. It simulates a CPU with its own instruction set, 8 general-purpose registers (named after chemical elements), and 1MB of RAM. 
 
 It was built for those who want to understand how a processor works under the hood or for anyone tired of hardcoding bytes like a "peasant" and looking for a way to execute custom binary files with a dedicated CLI.
 
@@ -22,7 +22,7 @@ It was built for those who want to understand how a processor works under the ho
 ## 🚀 Features
 
 * **32-bit Architecture:** Full support for 32-bit integer operations.
-* **Memory Management:** 64KB of emulated RAM.
+* **Memory Management:** 1MB of emulated RAM.
 * **Stack Support:** Built-in `PUSH` and `POP` operations for advanced memory handling.
 * **Chemical Registers:** 8 registers: `H`, `He`, `Li`, `Be`, `B`, `C`, `N`, `O`.
 * **CLI Driven:** Load and execute `.bin` or `.hex` files directly from the terminal.
@@ -50,6 +50,8 @@ It was built for those who want to understand how a processor works under the ho
 | OUT       | 0x40        | 64      | 01000000 |
 | OUT_REG   | 0x41        | 65      | 01000001 |
 | IN        | 0x42        | 66      | 01000010 |
+| LOADF     | 0x43        | 67      | 01000011 |
+| LOADF_REG | 0x44        | 68      | 01000100 |
 | PUSH      | 0x50        | 80      | 01010000 |
 | PUSH_REG  | 0x51        | 81      | 01010001 |
 | POP       | 0x52        | 82      | 01010010 |

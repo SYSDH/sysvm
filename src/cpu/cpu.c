@@ -26,7 +26,8 @@ static void writeInt(int addr, int val) {
 }
 
 
-void cpu() {
+void cpu(int initpc) {
+    PC = initpc;
     
     while (1)
     {

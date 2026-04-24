@@ -11,7 +11,9 @@ int main(int argc, char **argv) {
 
     char *pos = NULL;
 
-    if (parseArgs(argc, argv, NULL, &pos)) return 1;
+    Config cfg = {0};
+
+    if (parseArgs(argc, argv, &cfg, &pos)) return 1;
     if (!pos) { showError(FATAL_ERROR, "no input files"); return 1;}
 
     FILE *f = fopen(pos, "rb");
@@ -40,7 +42,7 @@ int main(int argc, char **argv) {
 
     fclose(f);
     
-    cpu();
+    cpu(cfg.entryAddr);
 
     return 0;
 }
