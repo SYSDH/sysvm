@@ -1,26 +1,27 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "args.h"
-#include "../helpers/helpers.h"
+#include "args/args.h"
+#include "utils.h"
 
+#define X(short, long, desc, argType, handler) {short, long, desc, argType, handler},
 ArgOption options[] = {
-    {"v", "version", "Show the version of project", 0, handleVersion},
-    {"h", "help", "Show this message", 0, handleHelp},
-    {NULL, "entry", "Set Program Counter", 1, handleEntry}
+    ARGS_TABLE
 };
+#undef X
 
 const int optCount = sizeof(options) / sizeof(options[0]);
 
-int parseArgs(int argc, char **argv, void *context, char **targetPos) {
+int parseArgv(int argc, char **argv, ArgCtx *ctx) {
     for (int i = 1; i < argc; i++) {
         char *current = argv[i];
 
         if (current[0] != '-' || current[1] == '\0') {
 
-            if (targetPos != NULL) {
-                *targetPos = current;
+            if (ctx->pos == NULL) {
+                ctx->pos = current;
             }
+
             continue;
         }
 
@@ -43,8 +44,9 @@ int parseArgs(int argc, char **argv, void *context, char **targetPos) {
                     }
                 }
 
-                options[j].handler(val, context);
+                options[j].handler(val, ctx);
                 found = 1;
+
                 break;
             }
         }
@@ -54,5 +56,6 @@ int parseArgs(int argc, char **argv, void *context, char **targetPos) {
             return 1;
         }
     }
+
     return 0;
 }

@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../args.h"
-#include "../../helpers/helpers.h"
+#include "args/args.h"
+#include "utils.h"
 
-void handleHelp(const char *val, void *context) {
+void handleHelp(const char *val, ArgCtx *ctx) {
     #define BRIGHT "\x1b[1m"
     #define RESET "\x1b[0m"
 
     (void)val;
-    (void)context;
+    (void)ctx;
 
     printf("Usage: %s%s [options] <File>%s\n\n", BRIGHT, programName, RESET);
     printf("%sOptions%s:\n", BRIGHT, RESET);

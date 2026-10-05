@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../helpers.h"
+#include "utils.h"
 
 #include <stdarg.h>
 
-char *programName = "";
+char *programName;
 
 void showError(Severity sev, const char *extraMessage, ...) {
     va_list msg;
@@ -15,7 +15,7 @@ void showError(Severity sev, const char *extraMessage, ...) {
     #define RED "\x1b[31m"
     #define RESET "\x1b[0m"
 
-    const char *color = "";
+    const char *color        = "";
     const char *errorMessage = "";
 
     if (sev == FATAL_ERROR) {

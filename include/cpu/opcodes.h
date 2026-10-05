@@ -1,9 +1,6 @@
-#ifndef CPU_H
-#define CPU_H
+#pragma once
 
-#include "../ram/ram.h"
 
-// Commands
 typedef enum {
     // System
     EXIT        = 0xFF,
@@ -35,21 +32,4 @@ typedef enum {
     // Ram
     LOAD        = 0x60, LOAD_REG    = 0x61,
     STORE       = 0x62, STORE_REG   = 0x63,
-
 } Opcode;
-
-// Register
-#define H 0
-#define He 1
-#define Li 2
-#define Be 3
-#define B 4
-#define C 5
-#define N 6
-#define O 7
-
-extern unsigned char RAM[RAMSIZE];
-
-void cpu(int initpc);
-
-#endif
